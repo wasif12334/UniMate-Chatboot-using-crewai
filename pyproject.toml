@@ -1,0 +1,26 @@
+[project]
+name = "unimakte"
+version = "0.1.0"
+description = "UniMakte using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "chromadb",
+   
+    "crewai[tools]>=0.119.0,<1.0.0",
+    "pypdfium2",
+]
+
+[project.scripts]
+unimate = "unimakte.main:run"
+run_crew = "unimakte.main:run"
+train = "unimakte.main:train"
+replay = "unimakte.main:replay"
+test = "unimakte.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
