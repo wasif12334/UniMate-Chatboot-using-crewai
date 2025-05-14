@@ -12,11 +12,12 @@ dependencies = [
 ]
 
 [project.scripts]
-unimate = "unimakte.main:run"
+unimate = "unimakte.unimate:uni_mate"
 run_crew = "unimakte.main:run"
 train = "unimakte.main:train"
 replay = "unimakte.main:replay"
 test = "unimakte.main:test"
+
 
 [build-system]
 requires = ["hatchling"]
