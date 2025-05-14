@@ -1,43 +1,81 @@
-from crewai import Crew,Process,task ,agent
-from crewai.project import CrewBase,agent,crew ,task
-from dotenv import load_dotenv
+from crewai import Crew, Process, Agent,task
+from crewai.project import CrewBase, agent, crew,task
 from crewai.agents.agent_builder.base_agent import BaseAgent
+from dotenv import load_dotenv
 from typing import List
 
 load_dotenv()
 
 @CrewBase
 class Unimate():
-    # agents_config='config/agents.yaml'
-    # task_config='config/task.yaml'
+    """Unimakte crew"""
 
-    agent:list[BaseAgent]
-    task:list[task]
+    agents: List[BaseAgent]
+    tasks: List[task]
+
     @agent
-    def task_manager(self):
-        pass
-    
+    def TaskManager(self) -> Agent:
+        return Agent(
+            config=self.agents_config['task_manager'], 
+            verbose=True
+        )
+
     @agent
-    def study_assistant(self):
-        pass
-    
+    def StudyAssistant(self) -> Agent:
+        return Agent(
+            config=self.agents_config['study_assistant'], 
+            verbose=True
+        )
     @agent
-    def note_organizer(self):
-      pass
+    def NoteOrganizer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['note_organizer'], 
+            verbose=True
+        )
+    @agent
+    def ContentGenerator(self) -> Agent:
+        return Agent(
+            config=self.agents_config['content_generator'], 
+            verbose=True
+        )
+
     
-    @agent 
-    def content_generator(self):
-      pass
-    
+    @task
+    def TaskManager_task(self) -> task:
+        return task(
+            config=self.tasks_config['manage_tasks'],
+        )
+
+    @task
+    def StudyAssistant_task(self) -> task:
+        return task(
+            config=self.tasks_config['assist_study'],
+            output_file='report.md'
+        )
+    @task
+    def ContentGenerator_task(self) -> task:
+        return task(
+            config=self.tasks_config['create_content'],
+            output_file='report.md'
+        )
+    @task
+    def NoteOrganizer_task(self) -> task:
+        return task(
+            config=self.tasks_config['generate_notes'],
+            output_file='report.md'
+        )
+
     @crew
-    def crew(self)->Crew:
-       return Crew(
-          agents=self.agents,
-          tasks=self.tasks,
-          process=Process.sequential,
-          verbose=True
-       )
-    
+    def crew(self) -> Crew:
+        """Creates the Unimakte crew"""
+        return Crew(
+            agents=self.agents,
+            tasks=self.tasks, 
+            process=Process.sequential,
+            verbose=True,
+        )
+
 def uni_mate():
-    result= Unimate().crew().kickoff()   
+    query="Want to khown about stufy plan for the DSA"
+    result=Unimate().crew().kickoff(query)
     print(result)

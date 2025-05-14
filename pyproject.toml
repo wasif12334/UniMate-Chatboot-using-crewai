@@ -5,12 +5,9 @@ description = "UniMakte using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "chromadb",
-   
-    "crewai[tools]>=0.119.0,<1.0.0",
-    "pypdfium2",
+        "crewai>=0.119.0",
+        "google-generativeai>=0.8.5",
 ]
-
 [project.scripts]
 unimate = "unimakte.unimate:uni_mate"
 run_crew = "unimakte.main:run"
