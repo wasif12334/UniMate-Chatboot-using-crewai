@@ -16,7 +16,7 @@ class Unimate():
     @agent
     def TaskManager(self) -> Agent:
         return Agent(
-            config=self.agents_config['task_manager'], 
+            config=self.agents_config['manage_tasks'], 
             verbose=True
         )
 
