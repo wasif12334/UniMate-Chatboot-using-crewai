@@ -1,26 +1,23 @@
 [project]
-name = "unimakte"
+name = "unimatechatbot"
 version = "0.1.0"
-description = "UniMakte using crewAI"
+description = "unimatechatbot using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<3.13"
 dependencies = [
-        "crewai>=0.119.0",
-        "google-generativeai>=0.8.5",
-        "python-dotenv>=1.1.0",
-        "pyyaml>=6.0.2",
+    "crewai[tools]>=0.119.0,<1.0.0",
+    "langchain>=0.3.25",
 ]
-[project.scripts]
-unimate = "unimakte.unimate:uni_mate"
-run_crew = "unimakte.main:run"
-train = "unimakte.main:train"
-replay = "unimakte.main:replay"
-test = "unimakte.main:test"
 
+[project.scripts]
+kickoff = "unimatechatbot.main:kickoff"
+run_crew = "unimatechatbot.main:kickoff"
+plot = "unimatechatbot.unimate_main:plot"
+unimate="unimatechatbot.unimate_main:kickoff"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.crewai]
-type = "crew"
+type = "flow"

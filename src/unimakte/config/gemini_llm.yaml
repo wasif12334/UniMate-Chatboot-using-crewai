@@ -1,5 +1,0 @@
-gemini_llm:
-  provider: google
-  config:
-    model: ${MODEL}
-    api_key: ${gemini_api_key}

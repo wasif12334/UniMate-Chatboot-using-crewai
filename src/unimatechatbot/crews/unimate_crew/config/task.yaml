@@ -1,0 +1,63 @@
+UserInteraction:
+  description: >
+    1-Accepts and responds to user inputs in natural language.
+    2-Delivers the final response back to the student.
+  expected_output: >
+    1-Cleaned and formatted query text to pass to QueryClassifierAgent.
+    2-Friendly, clear chatbot-style reply to the user.
+
+  agent: UI_Agent
+
+QueryClassifier:
+  description: >
+    Analyzes user intent using NLP. Determines 
+    if the query is about a course, event, profile info, booking, etc.
+    you have to return a one word for the routin like e.g., "personal_info",
+    "course_query", "appointment_request"
+  expected_output: >
+     A classified label or routing tag 
+     (e.g., "personal_info", "course_query", "appointment_request")
+
+  agent: QueryClassifier_Agent
+
+knowledgeRetrival:
+  description: >
+    Retrieves general info like: course details, faculty list, events, 
+    or admission policies from API/web.
+  expected_output: >
+    1-A factual answer string based on the university public data.
+    2-Formats data from APIs, websites, or scraped HTML into human-readable text. and saved in knowledge.txt file
+    3-Structured summary of the requested info (e.g., “CS101 is taught by Dr. A on Mon/Wed”).
+  agent: KnowledgeBase_Agent
+
+personalization:
+  description: >
+    Accesses student-specific data like grades, class schedules, attendance, or fee status.
+  expected_output: >
+   Accurate, secure personal info (e.g., “Your current GPA is 3.45 and your next class is DBMS at 10AM.”) 
+  agent: Personalized_Agent
+
+appointment_request:
+  description: >
+     1- Finds available slots and books appointments with professors, advisors, or admin staff.
+     2- Appointment confirmation, rescheduling options, or error if slot is unavailable
+  expected_output: >
+    it ahould be clear and concise like (Your meeting with
+    Dr. Kamran has been scheduled for Thursday at 2:30 PM in Room CS-201.")
+
+  agent: Appointment_Agent
+
+Notify:
+  description: >
+    Sends alerts like upcoming deadlines, event reminders, or class cancellation notices.
+  expected_output: >
+    Scheduled or on-demand notification: “Reminder: Your DBMS assignment is due tomorrow.” 
+  agent: Notification_Agent
+
+CallFor_HI:
+  description: >
+    Detects when a query cannot be answered automatically. Passes it to a human (or logs it).
+  expected_output: >
+    Message like: “I am forwarding this to the student affairs team. You will hear back soon.” 
+  agent: Escalation_Agent
+
